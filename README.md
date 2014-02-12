@@ -68,4 +68,4 @@ This has been fast and easy, but let's take it one step futher. You only want ce
     'index': true
   }
 ```
-* Now test POSTing messages. You now have to include an employee_id parameter in order to POST anything.
+* Now test POSTing messages. You now have to include an employee_id parameter in the query string in order to POST anything.
