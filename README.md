@@ -11,23 +11,37 @@ sails new .
 
 ##Step 2: Generate the messages scaffolds
 Sails.js auto-generates controllers and models for us when we use the `generate` command. Let's use that to create our messages structure.
-* Create a messages scaffold (`sails generate messages`)
-* Note how both the controller and the model were created (api/controllers/MessagesController.js and api/models/Messages.js)
-
-##Step 3: Test your endpoint, add a schema
+* Create a message scaffold (`sails generate message`)
+* Note how both the controller and the model were created (api/controllers/MessageController.js and api/models/Message.js)
 * Use postman to POST some messages to your new endpoint. At this point, you can use any attributes you want. (Also, make sure your server is running)
-* Add a schema to your messages model. Open Messages.js and do the following:
-  * Add some attributes: 'name', 'team', 'body'
-  * Before the `attributes`, add the line: `schema: true`. When you're done, your model should resemble this:
+
+##Step 3: Create a custom route and view
+We have an auto-generated API, but let's create a simple view so we can see our data.
+* Let's start by creating a controller called HomeController.
 
 ```javascript
-module.exports = {
+sails generate controller home
+```
+* Open up the generated controller in api/controllers/HomeController.js
+* Add an `index` method. Sails is built on express, and each of the controller's methods will expect a request and response parameter, just like Express does.
+* Let's render a view.
 
- schema: true,
+```javascript
+index: function(req, res) {
+  res.view('home');
+}
+```
+* Create a view file in views/home.ejs. Sails uses ejs as its templating engine.
+* In the home.ejs file, let's add some code so we can see all the messages that have been displayed
 
- attributes: {
-   ///...your attributes here
- }
-};
+```html
+<div class="messages">
+ <% messages.forEach(function(message) { %>
+  <p><%=message.body%></p>
+ <% }); %>
+</div>
 ```
 
+
+
+##Step 4: Only allow authenticated workers to post messages
