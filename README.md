@@ -31,7 +31,7 @@ index: function(req, res) {
   res.view('home');
 }
 ```
-* Create a view file in views/home.ejs. Sails uses ejs as its templating engine.
+* Create a view file at views/home.ejs. Sails uses ejs as its templating engine.
 * In the home.ejs file, let's add some code so we can see all the messages that have been displayed
 
 ```html
@@ -41,6 +41,7 @@ index: function(req, res) {
  <% }); %>
 </div>
 ```
+* Notice the tags that are particular to ejs. These are obviously very different from the syntax that Angular uses.
 * In order for our view to work, let's send the messages to the view function back in our controller. Use the [`find`](http://sailsjs.org/#!documentation/models) method of the Message model, then use the promise's success method to render the view.
 
 ```javascript
