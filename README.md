@@ -41,7 +41,30 @@ index: function(req, res) {
  <% }); %>
 </div>
 ```
+* In order for our view to work, let's send the messages to the view function back in our controller. Use the [`find`](http://sailsjs.org/#!documentation/models) method of the Message model, then use the promise's success method to render the view.
 
-
+```javascript
+index: function(req, res) {
+  Message.find().success(function(messages) {
+    res.view('home', {messages: messages});
+  }
+}
+```
+* Test your new view and controller in the browser
 
 ##Step 4: Only allow authenticated workers to post messages
+This has been fast and easy, but let's take it one step futher. You only want certain people to be able to post messages. Let's make a new policy file that will limit who can POST messages to our API.
+* Create a file at api/policies/isEmployee.js
+* Model your file after what is at api/policies/isAuthenticated.js (you can copy the text over to start with if you'd like)
+* Notice the `next()` function. Just like with Express, this middleware allows us to preform some logic before a request is processed at the controller level. We can intervene if we don't like what the request contains (or doesn't contain).
+* Let's use an if statement to check and see if the request has a query param named "employee_id." If it doesn't, let's return "forbidden." See the isAuthenticated policy file for reference.
+* Add the policy to the config/policies.js
+
+```javascript
+  '*': true,
+  MessageController: {
+    '*': ['isEmployee'],
+    'index': true
+  }
+```
+* Now test POSTing messages. You now have to include an employee_id parameter in order to POST anything.
