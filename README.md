@@ -69,3 +69,9 @@ This has been fast and easy, but let's take it one step futher. You only want ce
   }
 ```
 * Now test POSTing messages. You now have to include an employee_id parameter in the query string in order to POST anything.
+
+##Step 5 (Black Diamond): Show the messages in real-time
+* Use the [real-time documentation](http://sailsjs.org/#!documentation/sockets) at Sails to show the incoming messages at home.ejs in real-time. The main tutorial video on the homepage of the Sails website also goes through this, and might be more helpful.
+
+##Step 6 (Black Diamond): Make the real-time communication part of an Angular service, and integrate Angular into your Sails app. 
+You probably won't be able to use Yeoman very easily here, so you'll have to include the script tags for Angular as well as generate your own application module, your own controllers, and your own service. [This article](http://www.html5rocks.com/en/tutorials/frameworks/angular-websockets/) can help you with the Angular-to-socket communication, and poking around [this repo](https://github.com/levid/angular-sails-socketio-mongo-demo) can help you figure out how to organize and import your Angular files.
