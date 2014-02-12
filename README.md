@@ -13,7 +13,15 @@ sails new .
 Sails.js auto-generates controllers and models for us when we use the `generate` command. Let's use that to create our messages structure.
 * Create a message scaffold (`sails generate message`)
 * Note how both the controller and the model were created (api/controllers/MessageController.js and api/models/Message.js)
-* Use postman to POST some messages to your new endpoint. At this point, you can use any attributes you want. (Also, make sure your server is running)
+* Use postman to POST some messages to your new endpoint. At this point, you can use any attributes you want, but let's post messages with this structure:
+
+```javascript
+{
+  "body": "hello world",
+  "from": "Don in Accounting"
+}
+```
+* (Also, make sure your server is running)
 
 ##Step 3: Create a custom route and view
 We have an auto-generated API, but let's create a simple view so we can see our data.
@@ -37,7 +45,7 @@ index: function(req, res) {
 ```html
 <div class="messages">
  <% messages.forEach(function(message) { %>
-  <p><%=message.body%></p>
+  <p><%=message.body%> (<%=message.from%>)</p>
  <% }); %>
 </div>
 ```
@@ -50,6 +58,11 @@ index: function(req, res) {
     res.view('home', {messages: messages});
   }
 }
+```
+* Finally, we need to override the default route and point it to your controller. Edit config/routes.js and point '/' to the index method of the HomeController.
+
+```javascript
+'/': 'HomeController.index'
 ```
 * Test your new view and controller in the browser
 
