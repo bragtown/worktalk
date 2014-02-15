@@ -56,7 +56,7 @@ index: function(req, res) {
 index: function(req, res) {
   Message.find().success(function(messages) {
     res.view('home', {messages: messages});
-  }
+  });
 }
 ```
 * Finally, we need to override the default route and point it to your controller. Edit config/routes.js and point '/' to the index method of the HomeController.
