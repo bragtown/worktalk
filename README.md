@@ -5,6 +5,15 @@ A simple SailsJS project
 
 ##Step 1: Create your Sails project
 
+###Create the worktalk directory, and cd into it.
+
+```javacript
+mkdir worktalk
+cd worktalk
+```
+
+###Generate the sails files with the new command.
+
 ```javascript
 sails new .
 ```
