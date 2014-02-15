@@ -59,11 +59,11 @@ index: function(req, res) {
 </div>
 ```
 * Notice the tags that are particular to ejs. These are obviously very different from the syntax that Angular uses.
-* In order for our view to work, let's send the messages to the view function back in our controller. Use the [`find`](http://sailsjs.org/#!documentation/models) method of the Message model, then use the promise's success method to render the view.
+* In order for our view to work, let's send the messages to the view function from our controller. Use the [`find`](http://sailsjs.org/#!documentation/models) method of the Message model, then use the [promise's](http://www.html5rocks.com/en/tutorials/es6/promises/) done method to render the view - it takes a function as an argument which you pass the possible error, and the successful return (in this case the messages).
 
 ```javascript
 index: function(req, res) {
-  Message.find().success(function(messages) {
+  Message.find().done(function(err, messages) {
     res.view('home', {messages: messages});
   });
 }
